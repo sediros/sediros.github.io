@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SedirOS – Sunucular için sıkılaştırılmış Debian Linux</title>
+<meta name="description" content="SedirOS, sunucular için sıkılaştırılmış Debian 13 Linux: güvenlik duvarı, anahtarla SSH, AppArmor, SSH ile açılan şifreli disk ve günlük güvenlik denetimi.">
+<link rel="canonical" href="https://sediros.github.io/tr/">
+<link rel="alternate" hreflang="en" href="https://sediros.github.io/">
+<link rel="alternate" hreflang="tr" href="https://sediros.github.io/tr/">
+<link rel="alternate" hreflang="x-default" href="https://sediros.github.io/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1613" media="(prefers-color-scheme: dark)">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; script-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/assets/icon-512.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SedirOS">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="SedirOS – Sunucular için sıkılaştırılmış Debian Linux">
+<meta property="og:description" content="Güvenli varsayılan ayarlarla gelen Debian 13: SSH ile açılabilen şifreli disk ve bir ayar değiştiğinde haber veren günlük denetim. Özgür ve açık kaynak.">
+<meta property="og:url" content="https://sediros.github.io/tr/">
+<meta property="og:image" content="https://sediros.github.io/assets/og-tr.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kalkan içinde sedir ağacı olan SedirOS logosu ve “Sunucular için sıkılaştırılmış Debian” yazısı">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "SedirOS",
+  "inLanguage": "tr",
+  "description": "Debian 13 (trixie) tabanlı, minimal ve sıkılaştırılmış bir Linux dağıtımı: güvenli varsayılan ayarlar, şifreli kurulum ve günlük güvenlik denetimi.",
+  "url": "https://sediros.github.io/tr/",
+  "applicationCategory": "SecurityApplication",
+  "operatingSystem": "Linux",
+  "softwareVersion": "1.1",
+  "datePublished": "2026-11-08",
+  "processorRequirements": "amd64 veya arm64, UEFI",
+  "downloadUrl": "https://sediros.github.io/sediros/",
+  "license": "https://www.apache.org/licenses/LICENSE-2.0",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" },
+  "image": "https://sediros.github.io/assets/icon-512.png",
+  "sameAs": ["https://github.com/sediros/sediros", "https://sourceforge.net/projects/sediros/"]
+}
+</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand-link" href="/tr/" aria-label="SedirOS ana sayfa">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/assets/logo-dark.svg">
+        <img src="/assets/logo.svg" alt="SedirOS" width="110" height="40">
+      </picture>
+    </a>
+    <nav class="nav" aria-label="Ana menü">
+      <a class="hide-sm" href="#ozellikler">Özellikler</a>
+      <a class="hide-sm" href="#guvenlik">Güvenlik</a>
+      <a class="hide-sm" href="#baslarken">Başlarken</a>
+      <a class="hide-xs" href="https://github.com/sediros/sediros" target="_blank" rel="noopener">GitHub</a>
+      <a class="lang" href="/" hreflang="en" lang="en" title="English">EN</a>
+      <a class="btn btn-primary" href="https://sediros.github.io/sediros/">İndir</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div>
+      <p class="badge"><strong>SedirOS 1.1</strong><span aria-hidden="true">·</span><span>Debian 13 trixie tabanlı</span><span class="wide" aria-hidden="true">·</span><span class="wide">özgür ve açık kaynak</span></p>
+      <h1 id="hero-title">Sunucular için sıkılaştırılmış Debian. <span>Bir ayar değişirse size haber verir.</span></h1>
+      <p class="lede">SedirOS, ilk açılıştan itibaren güvenli ayarlarla gelen Debian’dır: güvenlik duvarı, yalnızca anahtarla SSH girişi, AppArmor ve uzaktan SSH ile açabileceğiniz şifreli bir disk. Sıkılaştırmanın yerinde olup olmadığını her gün kontrol eder, bir şey kötüye giderse size bildirir.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://sediros.github.io/sediros/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
+          ISO’yu indir
+        </a>
+        <a class="btn btn-ghost" href="#dene">Sanal makinede dene</a>
+      </div>
+      <p class="hero-note">UEFI ile açılan amd64 ve arm64 makineler için. Apache-2.0 lisanslı.</p>
+    </div>
+    <img class="shot" src="/assets/audit.svg" width="806" height="592" alt="Terminal: kurulu bir SedirOS sisteminde sudo sediros-audit çıktısı; çekirdek ayarları, SSH, güvenlik duvarı, AppArmor, hesaplar, güncellemeler, disk şifreleme ve Secure Boot kontrollerinin hepsi geçti" fetchpriority="high">
+  </div>
+</section>
+
+<div class="facts">
+  <ul>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>Aynı Debian paketleri ve güncellemeleri</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Tam disk şifreleme (LUKS2)</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>Debian’ın imzalı zinciriyle Secure Boot</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>İmzalı paketler, kaynağı doğrulanabilir derlemeler</li>
+  </ul>
+</div>
+
+<section id="ozellikler" aria-labelledby="features-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Özellikler</p>
+      <h2 id="features-title">Bir sunucunun güvenli başlaması için gereken her şey, fazlası değil</h2>
+      <p>SedirOS, Debian’a birkaç paket ekler; onun yerini almaz. Debian bilginiz, dokümanlarınız ve paketleriniz aynen geçerli.</p>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/></svg></div>
+        <h3>Varsayılan olarak sıkılaştırılmış</h3>
+        <p>Çekirdek ve ağ sıkılaştırması, AppArmor, gelen trafiği reddeden güvenlik duvarı, modern şifrelemeyle yalnızca anahtarla SSH, daha az setuid programı ve otomatik güvenlik güncellemeleri.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg></div>
+        <h3>Günlük güvenlik denetimi</h3>
+        <p><code>sediros-audit</code>, sıkılaştırmanın yerinde olup olmadığını her gün kontrol eder ve bir ayarı hangi dosyanın değiştirdiğini gösterir. Bir şey kötüye giderse e-posta, webhook ya da Prometheus ile bildirir.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <h3>Şifreli disk, uzaktan açılabilir</h3>
+        <p>Kurulum aracı diski şifreler. İsterseniz diskin kilidini açılışta SSH üzerinden açabilirsiniz; fiziksel olarak erişemediğiniz sunucular için. <code>sediros unlock</code> bunu tek komutla yapar.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></div>
+        <h3>Altında saf Debian</h3>
+        <p>Aynı paketler, Debian güvenlik ekibinden aynı güncellemeler, aynı <code>apt</code>. SedirOS’un kendi paketleri, Debian paketlerinin yerine geçemeyen imzalı bir depodan gelir.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg></div>
+        <h3>Çok sunucu, tek tablo</h3>
+        <p><code>sediros fleet</code>, bütün sunucularınızın sıkılaştırma durumunu SSH üzerinden tek tabloda gösterir. İlgilenmeniz gereken bir sunucu varsa hata koduyla çıkar; cron ya da CI içinde rahatça kullanılır.</p>
+      </article>
+      <article class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M13 15h4"/></svg></div>
+        <h3>Mac’inizde hızlı sanal makineler</h3>
+        <p><code>sediros launch</code>, macOS (Apple Silicon) veya Linux üzerinde birkaç saniyede bir SedirOS sanal makinesi başlatır: test, geliştirme ya da kurmadan önce SedirOS’u denemek için.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="guvenlik" class="alt" aria-labelledby="security-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Bir sunucuyu nasıl korur</p>
+      <h2 id="security-title">Önem sırasına göre üç katman</h2>
+      <p>Tek bir ayar bir sunucuyu güvenli yapmaz. SedirOS; Debian’ın düzeltmelerini, daha küçük bir saldırı yüzeyini ve ikisinin de yerinde kaldığını kontrol eden bir denetimi bir araya getirir.</p>
+    </div>
+    <div class="layers">
+      <article class="layer">
+        <h3>Güncellemeler</h3>
+        <p>Açıkları Debian güvenlik ekibi düzeltir; SedirOS bu düzeltmeleri her gün otomatik olarak kurar. Yeni bir çekirdek yeniden başlatma gerektirdiğinde SedirOS bunu girişte söyler.</p>
+      </article>
+      <article class="layer">
+        <h3>Daha küçük bir saldırı yüzeyi</h3>
+        <p>Sıkılaştırma, sunucuların ihtiyaç duymadığı özellikleri kapatır. Böylece o koddaki açıklara, henüz kimsenin bulmadıkları da dahil, ulaşılamaz.</p>
+      </article>
+      <article class="layer">
+        <h3>Böyle kaldığını kontrol etmek</h3>
+        <p>Kurulan yazılımlar, güncellemeler ve insanlar ayarları değiştirir. Günlük denetim bunu fark eder ve sessizce geri almak yerine size haber verir.</p>
+      </article>
+    </div>
+    <div class="callout">
+      <h3>Bir örnek: CVE-2026-98432</h3>
+      <p>Linux çekirdeğinin IPv4 TCP bağlantı kurulumunda, uzaktan tetiklenebilen kritik bir use-after-free açığı. Düzeltme, Debian’ın 6.12.113 ve sonraki çekirdeklerinde. SedirOS imajları bu çekirdekle geliyor, kurulu sistemler de güncellemelerle alıyor.</p>
+      <p>Sunucu yeni çekirdekle yeniden başlatılana kadar SedirOS’un varsayılan ayarları açığa giden ağ yolunu zaten kapalı tutuyor: IP seçenekleri taşıyan IPv4 TCP paketleri TCP koduna ulaşmadan düşürülüyor, diğer iki giriş yolu da kapalı.</p>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="look-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Yakından bakış</p>
+      <h2 id="look-title">Kurması kolay, denemesi hızlı</h2>
+    </div>
+    <div class="showcase tall">
+      <div class="text">
+        <h3>Yalnızca önemli olanı soran bir kurulum aracı</h3>
+        <p>Disk, makine adı, yönetici kullanıcı, SSH anahtarınız (yapıştırın ya da <code>gh:&lt;kullanıcı&gt;</code> ile GitHub’dan alın) ve disk parolası. Diske tek bir şey yazılmadan önce her cevap kontrol edilir; kurulum bir dakikadan kısa sürer.</p>
+        <ul>
+          <li>Tam disk şifreleme (LUKS2), Secure Boot açık kalabilir</li>
+          <li>İsteğe bağlı: açılışta SSH üzerinden disk kilidini açma</li>
+          <li>Otomatik kurulumlar için her sorunun bir parametresi var</li>
+        </ul>
+      </div>
+      <img class="shot" src="/assets/install.svg" width="806" height="820" loading="lazy" alt="Terminal: SedirOS kurulum aracı disk, makine adı, klavye düzeni, kullanıcı, SSH anahtarı ve parolayı soruyor, ardından kurulum planını gösteriyor">
+    </div>
+    <div class="showcase flip" id="dene">
+      <div class="text">
+        <h3>Saniyeler içinde yeni bir SedirOS sanal makinesi</h3>
+        <p><code>sediros</code> komut satırı aracı, macOS ve Linux üzerinde QEMU ile SedirOS sanal makineleri çalıştırır. Her sanal makinenin kendi copy-on-write diski vardır; temiz bir sistem tek komut uzağınızda.</p>
+        <ul>
+          <li>SSH, dosya aktarımı, port yönlendirme ve snapshot hazır</li>
+          <li>İmajlar, sürümün sağlama toplamlarıyla doğrulanır</li>
+          <li>Sanal makinenin SSH portu yalnızca 127.0.0.1 üzerinde dinler</li>
+        </ul>
+      </div>
+      <img class="shot" src="/assets/cli.svg" width="634" height="174" loading="lazy" alt="Terminal: sediros launch komutu yaklaşık dört saniyede bir SedirOS sanal makinesi başlatıyor">
+    </div>
+  </div>
+</section>
+
+<section id="baslarken" class="alt" aria-labelledby="start-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Başlarken</p>
+      <h2 id="start-title">SedirOS’u kullanmanın iki yolu</h2>
+      <p>Bir sunucunun işletim sistemi olarak kurun ya da kendi bilgisayarınızda bir sanal makinede deneyin; ikisi birbirinden bağımsız. Ayrıntılı dokümantasyon İngilizcedir.</p>
+    </div>
+    <div class="paths">
+      <article class="path">
+        <h3>Sunucuya, bilgisayara ya da sanal makineye kurun</h3>
+        <p>UEFI ile açılan 64 bit bir makine ve 8 GiB disk alanı yeterli.</p>
+        <ol>
+          <li>Makinenize uygun ISO’yu indirin ve SHA-256 değerini kontrol edin.</li>
+          <li>UEFI modunda, bir USB bellekten ya da sanal makinenin CD sürücüsünden açın.</li>
+          <li><code>sudo sediros-install install</code> komutunu çalıştırıp soruları cevaplayın.</li>
+          <li>Yeniden başlatın, disk parolasını girin ve SSH ile bağlanın.</li>
+        </ol>
+        <div class="spacer"></div>
+        <a class="btn btn-primary" href="https://sediros.github.io/sediros/">SedirOS 1.1’i indir</a>
+      </article>
+      <article class="path">
+        <h3>macOS ya da Linux üzerinde deneyin</h3>
+        <p>QEMU’yu da kuran Homebrew ile:</p>
+<pre lang="en"><code><span class="p">$ </span>brew tap sediros/sediros https://github.com/sediros/sediros
+<span class="p">$ </span>brew trust sediros/sediros
+<span class="p">$ </span>brew install sediros
+<span class="p">$ </span>sediros pull          <span class="c" lang="tr"># sanal makine imajını indirir</span>
+<span class="p">$ </span>sediros launch dev
+<span class="p">$ </span>sediros shell dev</code></pre>
+        <div class="spacer"></div>
+        <a class="btn btn-ghost" href="https://github.com/sediros/sediros#trying-sediros-in-a-vm" target="_blank" rel="noopener" hreflang="en">Homebrew olmadan Linux</a>
+      </article>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <caption class="sr-only">Hangi ISO’yu indirmelisiniz</caption>
+        <thead><tr><th scope="col">Makineniz</th><th scope="col">ISO</th></tr></thead>
+        <tbody>
+          <tr><td>Intel ya da AMD işlemcili bilgisayar veya sunucu, ya da bunlar üzerinde çalışan bir sanal makine (VirtualBox, VMware, Proxmox, Hyper-V, QEMU/KVM)</td><td><code>sediros-1.1-install-amd64.iso</code></td></tr>
+          <tr><td>Apple Silicon işlemcili Mac (UTM, Parallels ya da VMware Fusion içinde sanal makine) veya ARM sunucu</td><td><code>sediros-1.1-install-arm64.iso</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="sss" aria-labelledby="faq-title">
+  <div class="wrap faq">
+    <div class="section-head">
+      <p class="eyebrow">SSS</p>
+      <h2 id="faq-title">Sık sorulan sorular</h2>
+    </div>
+    <div class="faq-list">
+    <details>
+      <summary>SedirOS, Debian’ın bir fork’u mu?</summary>
+      <div><p>Hayır, bir Debian türevi. Debian’ın paketlerini değiştirmeden kullanır ve üzerine kendi birkaç paketini ekler: sıkılaştırma, kurulum aracı, günlük denetim ve giriş ekranı. Bu bilinçli bir tercih: güvenlik düzeltmeleri doğrudan Debian güvenlik ekibinden gelir, SedirOS onları yeniden derlemez ya da geciktirmez. SedirOS 1, Debian 13’ü (trixie) izler; SedirOS 2, Debian 14’ü izleyecek.</p></div>
+    </details>
+    <details>
+      <summary>Güncellemeleri nasıl alırım? Yeniden kurmam gerekir mi?</summary>
+      <div><p>Yeniden kurmanız gerekmez. Debian’ın güvenlik güncellemeleri her gün otomatik olarak kurulur; SedirOS’un kendi paketleri de imzalı apt deposundan, aynı <code>apt</code> ile gelir. Yeni ISO’lar yalnızca yeni kurulumlar içindir.</p></div>
+    </details>
+    <details>
+      <summary>Ele geçirilmiş bir SedirOS deposu, Debian paketlerinin yerine geçebilir mi?</summary>
+      <div><p>Hayır. apt, SedirOS deposundan yalnızca adı <code>sediros-</code> ile başlayan paketleri alacak şekilde sabitlenmiştir; depodaki diğer paketler yok sayılır. İmza anahtarı çalınsa bile Debian paketleri değiştirilemez.</p></div>
+    </details>
+    <details>
+      <summary>Güvenlik duvarı varsayılan olarak etkin mi?</summary>
+      <div><p>Evet, ilk açılıştan itibaren. SSH dışındaki bütün gelen bağlantıları reddeder; SSH’ta da kısa sürede tekrarlanan bağlantı denemeleri yavaşlatılır. Giden bağlantılara izin verilir. Kurduğunuz bir servise, siz portunu açana kadar ağdan erişilemez, örneğin: <code>sudo ufw allow 443/tcp</code>. Böylece dışarıya yalnızca bilerek açtığınız servisler görünür.</p></div>
+    </details>
+    <details>
+      <summary>SedirOS’u masaüstü olarak kullanabilir miyim?</summary>
+      <div><p>Hayır. SedirOS’ta grafik arayüz yok: sunucular için tasarlandı ve SSH ya da konsoldan yönetilir. Bir bilgisayara da kurulabilir, örneğin ev sunucusu olarak. Masaüstü için doğrudan Debian’ı kullanın.</p></div>
+    </details>
+    <details>
+      <summary>Sunucumu güvende tutmak için başka ne yapmalıyım?</summary>
+      <div><p>SedirOS sağlam bir temel kurar; üzerinde çalıştırdığınız yazılımlar sizin elinizde. Üç alışkanlık yeterli: bir güncelleme yeni çekirdek getirdiğinde sunucuyu yeniden başlatın, kurduğunuz servisleri güçlü parolalarla ve yalnızca gereken portları açarak yapılandırın, günlük denetimin bildirimlerini e-posta ya da webhook ile alın. Denetim bir değişikliği bildirir ama geri almaz; çünkü bilerek yapılmış olabilir.</p></div>
+    </details>
+    <details>
+      <summary>Üretim ortamında kullanmaya hazır mı?</summary>
+      <div><p>SedirOS genç ve gönüllülerle yürüyen bir proje: 1.0 sürümü Kasım 2026’da yayınlandı. Her sürüm, Secure Boot açık sanal makinelerde otomatik olarak kurulup test edilir, Apple Silicon üzerinde de elle denenir. Fiziksel donanımda henüz test edilmedi; deneyimlerinizi paylaşırsanız seviniriz.</p></div>
+    </details>
+    <details>
+      <summary>Bir güvenlik açığını nasıl bildiririm?</summary>
+      <div><p><a href="https://github.com/sediros/sediros/blob/main/SECURITY.md" target="_blank" rel="noopener" hreflang="en">Güvenlik politikasında</a> anlatıldığı gibi, GitHub’ın güvenlik açığı bildirme özelliği üzerinden ve gizli olarak. Lütfen bunun için herkese açık bir issue açmayın.</p></div>
+    </details>
+    </div>
+  </div>
+</section>
+
+<section class="final alt" aria-labelledby="final-title">
+  <div class="wrap">
+    <h2 id="final-title">Daha güvenli bir sunucuyla başlayın</h2>
+    <p>ISO’yu indirin ya da sıradakileri görmek için projeyi GitHub’da takip edin.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://sediros.github.io/sediros/">SedirOS 1.1’i indir</a>
+      <a class="btn btn-ghost" href="https://github.com/sediros/sediros" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+        GitHub’da yıldızla
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="about">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/assets/logo-dark.svg">
+        <img src="/assets/logo.svg" alt="SedirOS" width="110" height="40" loading="lazy">
+      </picture>
+      <p class="about-text">Debian tabanlı, minimal ve sıkılaştırılmış bir Linux dağıtımı. Apache Lisansı 2.0 ile özgür ve açık kaynak. Adını Toros Dağları’nın ağacı sedirden alır.</p>
+      <p class="legal">SedirOS’un Debian projesiyle bir bağlantısı yoktur ve Debian projesi tarafından desteklenmez. Debian, Software in the Public Interest, Inc.’in tescilli markasıdır. Bu site çerez, script ya da takip aracı kullanmaz.</p>
+    </div>
+    <nav aria-label="Proje">
+      <p class="ft">Proje</p>
+      <ul>
+        <li><a href="https://sediros.github.io/sediros/">İndir</a></li>
+        <li><a href="https://github.com/sediros/sediros" target="_blank" rel="noopener">Kaynak kod</a></li>
+        <li><a href="https://github.com/sediros/sediros#readme" target="_blank" rel="noopener" hreflang="en">Dokümantasyon</a></li>
+        <li><a href="https://github.com/sediros/sediros/blob/main/ROADMAP.md" target="_blank" rel="noopener" hreflang="en">Yol haritası</a></li>
+        <li><a href="https://github.com/sediros/sediros/blob/main/CHANGELOG.md" target="_blank" rel="noopener" hreflang="en">Sürüm notları</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Topluluk">
+      <p class="ft">Topluluk</p>
+      <ul>
+        <li><a href="https://github.com/sediros/sediros/issues" target="_blank" rel="noopener">Hata bildirimleri ve fikirler</a></li>
+        <li><a href="https://github.com/sediros/sediros/blob/main/SECURITY.md" target="_blank" rel="noopener" hreflang="en">Güvenlik politikası</a></li>
+        <li><a href="https://sourceforge.net/projects/sediros/" target="_blank" rel="noopener">SourceForge yansısı</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
